@@ -803,7 +803,19 @@ function App() {
           </div>
 
           <div className="topbar-profile">
-            <button type="button" onClick={() => auth.signoutRedirect()} style={{ border: 0, background: "transparent", cursor: "pointer" }}>Sign out</button>
+            <button type="button" onClick={async () => {
+  const cognitoDomain =
+    "https://ap-southeast-2bgvpkc2wn.auth.ap-southeast-2.amazoncognito.com";
+
+  const clientId = "3ih97oi4d9h56r2o89kn078fdc";
+
+  const logoutUri = window.location.origin;
+
+  await auth.removeUser();
+
+  window.location.href =
+    `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+}} style={{ border: 0, background: "transparent", cursor: "pointer" }}>Sign out</button>
             <Bell size={20} />
             <div className="avatar small">{initials}</div>
           </div>
