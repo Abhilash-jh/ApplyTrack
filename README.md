@@ -50,4 +50,4 @@ ApplyTrack uses Cognito-based authentication and authenticated API requests. Res
 
 ---
 
-Built as a full-stack project to explore serverless application development with AWS.
+Built as a full-stack project to explore serverless application development with AWS. 
