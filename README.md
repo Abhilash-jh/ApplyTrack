@@ -1,4 +1,5 @@
 # ApplyTrack — Job Application Tracker
+![ApplyTrack Dashboard](screenshots/dashboard.png)
 
 ApplyTrack is a full-stack job application tracking platform designed to help users organize their job search, manage applications, maintain profile information, and upload resumes.
 
