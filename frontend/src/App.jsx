@@ -101,8 +101,8 @@ function App() {
     name: "",
     email: "",
     phone: "",
-    preferred_roles: "Software Engineer, Backend Developer, Python Developer",
-    preferred_locations: "Hyderabad, Remote",
+    preferred_roles: " ",
+    preferred_locations: "",
     linkedin: "",
     github: "",
     portfolio: "",
@@ -1032,7 +1032,7 @@ function App() {
               <section className="welcome-section">
                 <div>
                   <span className="eyebrow">YOUR JOB SEARCH WORKSPACE</span>
-                  <h1>Welcome back, {profile.name || "Abhilash"} 👋</h1>
+                  <h1>Welcome back, {profile.name || " "} 👋</h1>
                   <p>
                     Track applications, monitor your progress, and stay ready
                     for your next opportunity.
