@@ -8,7 +8,8 @@ import App from './App.jsx'
 const cognitoAuthConfig = {
   authority: 'https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_bGvPkc2wn',
   client_id: '3ih97oi4d9h56r2o89kn078fdc',
-  redirect_uri: 'http://localhost:5173',
+  redirect_uri: window.location.origin,
+  post_logout_redirect_uri: window.location.origin,
   response_type: 'code',
   scope: 'openid email',
 }
