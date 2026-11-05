@@ -1,10 +1,13 @@
 {
   "manifest_version": 3,
   "name": "ApplyTrack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Your personal AI job application copilot.",
   "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["http://localhost:5173/*"],
+  "host_permissions": [
+    "http://localhost:5173/*",
+    "https://main.d3uomahh7oyjyy.amplifyapp.com/*"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_title": "ApplyTrack"

@@ -4,7 +4,7 @@
 const API_BASE =
   "https://a2ovi23axz7o7ebqjsfy5z2emu0ukeyy.lambda-url.ap-southeast-2.on.aws";
 
-const DASHBOARD_URL = "http://localhost:5173";
+const DASHBOARD_URL = "https://main.d3uomahh7oyjyy.amplifyapp.com";
 const OIDC_CLIENT_ID = "3ih97oi4d9h56r2o89kn078fdc";
 const OIDC_AUTHORITY =
   "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_bGvPkc2wn";
