@@ -98,7 +98,7 @@ function App() {
   const [resumeError, setResumeError] = useState("");
 
   const [profile, setProfile] = useState({
-    name: "Abhilash Behara",
+    name: "",
     email: "",
     phone: "",
     preferred_roles: "Software Engineer, Backend Developer, Python Developer",
