@@ -1,0 +1,75 @@
+* { box-sizing: border-box; }
+body { margin: 0; width: 380px; background: #0b1020; color: #f1f5f9; font-family: "Segoe UI", Arial, sans-serif; }
+.app { padding: 20px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.logo { width: 42px; height: 42px; flex-shrink: 0; border-radius: 12px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; justify-content: center; align-items: center; font-size: 23px; font-weight: bold; }
+.header-info { flex: 1; min-width: 0; }
+h1 { font-size: 20px; margin: 0; }
+header p { margin: 4px 0 0; color: #94a3b8; font-size: 12px; }
+.profile-button { width: 36px; height: 36px; min-width: 36px; padding: 0; border-radius: 50%; background: #1e293b; border: 1px solid #334155; color: #cbd5e1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: .2s ease; }
+.profile-button:hover { background: #667eea; color: white; border-color: #667eea; }
+button { width: 100%; padding: 12px; border: none; border-radius: 9px; background: #667eea; color: white; font-weight: 600; font-size: 14px; cursor: pointer; }
+button:hover { background: #586bd4; }
+.status { color: #a5b4fc; font-size: 12px; margin-bottom: 14px; }
+.status-dot { display: inline-block; width: 7px; height: 7px; background: #22c55e; border-radius: 50%; margin-right: 6px; }
+.secondary { margin-top: 15px; background: #1e293b; border: 1px solid #334155; }
+.field { margin-top: 17px; }
+label { color: #818cf8; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+.field p { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: #e2e8f0; overflow-wrap: anywhere; }
+.match-card { margin-top: 20px; padding: 16px; border-radius: 12px; background: #151d32; border: 1px solid #293653; }
+.match-heading { display: flex; justify-content: space-between; align-items: center; }
+.match-heading h2 { margin: 7px 0 0; font-size: 32px; }
+.match-heading small { color: #94a3b8; font-size: 14px; }
+.match-label { background: #243453; color: #a5b4fc; padding: 6px 10px; border-radius: 20px; font-size: 11px; }
+.progress-track { height: 8px; background: #263248; border-radius: 10px; margin-top: 14px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #667eea, #8b5cf6); transition: width .4s ease; }
+.match-note { color: #94a3b8 !important; font-size: 11px !important; }
+.skill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.skill-tag { font-size: 11px; padding: 5px 8px; border-radius: 6px; background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+.skill-tag.matched { background: #12372e; color: #86efac; border-color: #166534; }
+.skill-tag.missing { background: #3b2630; color: #fda4af; border-color: #7f1d1d; }
+.description { max-height: 260px; overflow-y: auto; white-space: pre-line; line-height: 1.7; font-size: 13px; color: #cbd5e1; padding: 12px; margin-top: 8px; background: #111827; border: 1px solid #263248; border-radius: 8px; scrollbar-width: thin; }
+.hidden { display: none; }
+#loading, #message { margin-top: 12px; font-size: 12px; color: #a5b4fc; }
+footer { margin-top: 20px; text-align: center; color: #64748b; font-size: 10px; }
+#message { display: block; margin-top: 12px; padding: 10px; border-radius: 8px; background: #123b2a; color: #4ade80; font-size: 14px; font-weight: bold; text-align: center; min-height: 18px; }
+/* AI Analysis section */
+#aiAnalysis {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--border-color, #252d40);
+  border-radius: 12px;
+  background: var(--card-background, #111827);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* AI section headings */
+#aiAnalysis label {
+  display: block;
+  margin-top: 12px;
+  color: #8b93ff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#aiAnalysis label:first-child {
+  margin-top: 0;
+}
+
+/* AI response text */
+#aiAnalysis p {
+  margin: 0 0 8px;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* AI provider information */
+#aiAnalysis p:last-child {
+  margin-bottom: 0;
+}

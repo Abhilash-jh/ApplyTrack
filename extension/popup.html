@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApplyTrack</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo">A</div>
+      <div class="header-info">
+        <h1>ApplyTrack</h1>
+        <p>Your job search copilot</p>
+      </div>
+      <button id="profileBtn" class="profile-button" type="button"
+        title="Open ApplyTrack Dashboard" aria-label="Open ApplyTrack Dashboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M5 21v-2a7 7 0 0 1 14 0v2"></path>
+        </svg>
+      </button>
+    </header>
+
+    <div class="status"><span class="status-dot"></span>Ready to analyze</div>
+    <button id="analyzeBtn" type="button">Analyze Job</button>
+    <div id="loading" class="hidden">Analyzing job and profile...</div>
+
+    <section id="results" class="hidden">
+      <div class="field"><label>Job Title</label><p id="jobTitle"></p></div>
+      <div class="field"><label>Company</label><p id="company"></p></div>
+
+      <div class="match-card">
+        <div class="match-heading">
+          <div><label>PROFILE MATCH</label><h2><span id="matchScore">--</span><small>/100</small></h2></div>
+          <div id="matchLabel" class="match-label">Not analyzed</div>
+        </div>
+        <div class="progress-track"><div id="matchProgress" class="progress-fill"></div></div>
+        <p class="match-note">Estimated match based on your saved career profile.</p>
+      </div>
+
+      <div class="field"><label>Matched Skills</label><div id="matchedSkills" class="skill-list"></div></div>
+      <div class="field"><label>Skills to Develop / Missing Keywords</label><div id="missingSkills" class="skill-list"></div></div>
+      <button id="saveBtn" class="secondary" type="button">Save Job</button>
+      <div id="message"></div>
+    </section>
+
+    <footer>ApplyTrack · Your career companion</footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

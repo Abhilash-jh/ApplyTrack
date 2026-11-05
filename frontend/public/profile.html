@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApplyTrack | Career Profile</title>
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #151d30;
+      --input: #0d1425;
+      --border: #2c3a57;
+      --text: #e8edf8;
+      --muted: #9ba9c5;
+      --accent: #7897ff;
+      --accent-hover: #5f80f5;
+      --success: #75e0a3;
+      --danger: #ff9292;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .page {
+      width: min(1100px, calc(100% - 40px));
+      margin: 40px auto;
+    }
+
+    .header { margin-bottom: 28px; }
+
+    .header h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .section { margin-bottom: 32px; }
+
+    .section h2 {
+      color: var(--accent);
+      font-size: 20px;
+      margin: 0 0 20px;
+      font-weight: 650;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      color: #c7d2e8;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: 13px 14px;
+      background: var(--input);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(120, 151, 255, 0.12);
+    }
+
+    input::placeholder, textarea::placeholder { color: #65738e; }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .checkbox-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0;
+      cursor: pointer;
+      color: #c7d2e8;
+    }
+
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: var(--accent);
+    }
+
+    .hidden { display: none !important; }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 32px;
+    }
+
+    #message {
+      color: var(--success);
+      line-height: 1.5;
+    }
+
+    #message.error { color: var(--danger); }
+
+    button {
+      border: none;
+      border-radius: 9px;
+      background: var(--accent);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 24px;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--accent-hover); }
+    button:disabled { opacity: 0.6; cursor: wait; }
+
+    .summary-title {
+      margin-top: 0;
+      color: var(--success);
+    }
+
+ .summary-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+.summary-item strong {
+  display: inline-block;
+  min-width: 140px;
+  color: var(--text);
+}
+
+#editProfileButton {
+  margin-top: 20px;
+  min-width: 150px;
+  padding: 14px 24px;
+}
+    .summary-item strong { color: var(--text); }
+
+    @media (max-width: 700px) {
+      .page {
+        width: calc(100% - 24px);
+        margin: 20px auto;
+      }
+
+      .form-card { padding: 20px; }
+      .grid { grid-template-columns: 1fr; gap: 16px; }
+      .field.full { grid-column: auto; }
+      .header h1 { font-size: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Career Profile</h1>
+      <p>
+        Build your professional profile so ApplyTrack can find jobs matching
+        your skills, experience, salary expectations, and preferences.
+      </p>
+    </header>
+
+    <div id="profileSummary" class="form-card hidden"></div>
+
+    <form class="form-card" id="profileForm">
+
+      <section class="section">
+        <h2>Personal Information</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="full_name">Full Name</label>
+            <input id="full_name" name="full_name" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email">
+          </div>
+
+          <div class="field">
+            <label for="current_location">Current Location</label>
+            <input id="current_location" name="current_location"
+                   placeholder="City, State, Country">
+          </div>
+
+          <div class="field">
+            <label for="preferred_locations">Preferred Locations</label>
+            <input id="preferred_locations" name="preferred_locations"
+                   placeholder="Hyderabad, Bengaluru, Remote">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Experience</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="experience_level">Experience Level</label>
+            <select id="experience_level" name="experience_level">
+              <option value="Fresher">Fresher</option>
+              <option value="Experienced">Experienced</option>
+            </select>
+          </div>
+
+          <div class="field hidden" id="yearsExperienceField">
+            <label for="years_experience">Years of Experience</label>
+            <input id="years_experience" name="years_experience"
+                   type="number" min="0" step="0.5" value="0">
+          </div>
+
+          <div class="field">
+            <label for="employment_status">Employment Status</label>
+            <select id="employment_status" name="employment_status">
+              <option value="Unemployed">Unemployed</option>
+              <option value="Employed">Employed</option>
+              <option value="Student">Student</option>
+              <option value="Serving Notice Period">Serving Notice Period</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="notice_period">Notice Period</label>
+            <input id="notice_period" name="notice_period"
+                   placeholder="Immediate / 30 days / 60 days">
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="relocation" name="relocation">
+            Willing to relocate
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Job Preferences</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="desired_roles">Preferred Job Roles</label>
+            <input id="desired_roles" name="desired_roles"
+                   placeholder="Python Developer, Backend Engineer, SDE">
+          </div>
+
+          <div class="field">
+            <label for="work_mode">Work Mode</label>
+            <select id="work_mode" name="work_mode">
+              <option value="Any">Any</option>
+              <option value="Remote">Remote</option>
+              <option value="Onsite">Onsite</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="employment_type">Employment Type</label>
+            <select id="employment_type" name="employment_type">
+              <option value="Full-time">Full-time</option>
+              <option value="Internship">Internship</option>
+              <option value="Contract">Contract</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Any">Any</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Salary Expectations</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="expected_salary_min">Minimum Expected Salary</label>
+            <input id="expected_salary_min" name="expected_salary_min"
+                   type="number" min="0" placeholder="e.g. 600000">
+          </div>
+
+          <div class="field">
+            <label for="expected_salary_max">Maximum Expected Salary</label>
+            <input id="expected_salary_max" name="expected_salary_max"
+                   type="number" min="0" placeholder="e.g. 1000000">
+          </div>
+
+          <div class="field">
+            <label for="salary_period">Salary Period</label>
+            <select id="salary_period" name="salary_period">
+              <option value="LPA">Per year (INR)</option>
+              <option value="Monthly">Per month (INR)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="salary_strict" name="salary_strict">
+            Salary is a strict requirement
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Skills & Background</h2>
+        <div class="grid">
+          <div class="field full">
+            <label for="skills">Technical Skills</label>
+            <textarea id="skills" name="skills"
+              placeholder="Python, Java, SQL, React, FastAPI..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="education">Education</label>
+            <textarea id="education" name="education"
+              placeholder="Degree, college, graduation year"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="certifications">Certifications</label>
+            <textarea id="certifications" name="certifications"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="projects">Projects</label>
+            <textarea id="projects" name="projects"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Professional Links</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="linkedin_url">LinkedIn URL</label>
+            <input id="linkedin_url" name="linkedin_url" type="url">
+          </div>
+
+          <div class="field">
+            <label for="github_url">GitHub URL</label>
+            <input id="github_url" name="github_url" type="url">
+          </div>
+        </div>
+      </section>
+
+      <div class="form-footer">
+        <div id="message" role="status"></div>
+        <button type="submit" id="saveButton">Save Career Profile</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const API_URL = "http://127.0.0.1:8000/profile/";
+
+    const form = document.getElementById("profileForm");
+    const message = document.getElementById("message");
+    const saveButton = document.getElementById("saveButton");
+    const summary = document.getElementById("profileSummary");
+
+    let savedProfile = null;
+    let isEditing = false;
+
+    const experienceLevel = document.getElementById("experience_level");
+    const yearsField = document.getElementById("yearsExperienceField");
+    const yearsInput = document.getElementById("years_experience");
+
+    function updateExperienceVisibility() {
+      const experienced = experienceLevel.value === "Experienced";
+
+      yearsField.classList.toggle("hidden", !experienced);
+      yearsInput.required = experienced;
+
+      if (!experienced) yearsInput.value = "0";
+    }
+
+    experienceLevel.addEventListener("change", updateExperienceVisibility);
+
+    function showMessage(text, error = false) {
+      message.textContent = text;
+      message.classList.toggle("error", error);
+    }
+
+    function setField(name, value) {
+      const field = form.elements[name];
+      if (!field || value == null) return;
+
+      if (field.type === "checkbox") {
+        field.checked = Boolean(value);
+      } else {
+        field.value = value;
+      }
+    }
+
+    function loadIntoForm(profile) {
+      Object.keys(profile).forEach(key => setField(key, profile[key]));
+      updateExperienceVisibility();
+    }
+
+    function getFormData() {
+      const data = {};
+
+      for (const [key, value] of new FormData(form).entries()) {
+        data[key] = value;
+      }
+
+      data.relocation = form.elements.relocation.checked;
+      data.salary_strict = form.elements.salary_strict.checked;
+
+      data.years_experience = Number(data.years_experience || 0);
+
+      data.expected_salary_min =
+        data.expected_salary_min === "" || data.expected_salary_min === undefined
+          ? null : Number(data.expected_salary_min);
+
+      data.expected_salary_max =
+        data.expected_salary_max === "" || data.expected_salary_max === undefined
+          ? null : Number(data.expected_salary_max);
+
+      if (data.experience_level === "Fresher") {
+        data.years_experience = 0;
+      }
+
+      return data;
+    }
+
+    function normalize(data) {
+      const result = {};
+      Object.keys(data).sort().forEach(key => {
+        result[key] = data[key] ?? null;
+      });
+      return JSON.stringify(result);
+    }
+
+    function displaySummary() {
+      form.reset();
+      form.classList.add("hidden");
+      summary.classList.remove("hidden");
+
+      const safe = value => String(value || "Not provided")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+      summary.innerHTML = `
+        <h2 class="summary-title">Career Profile Saved</h2>
+        <p>Your profile has been saved. You can edit it whenever needed.</p>
+
+        <div class="summary-item"><strong>Name:</strong> ${safe(savedProfile.full_name)}</div>
+        <div class="summary-item"><strong>Email:</strong> ${safe(savedProfile.email)}</div>
+        <div class="summary-item"><strong>Experience:</strong> ${safe(savedProfile.experience_level)}</div>
+        <div class="summary-item"><strong>Location:</strong> ${safe(savedProfile.current_location)}</div>
+        <div class="summary-item"><strong>Work mode:</strong> ${safe(savedProfile.work_mode)}</div>
+        <div class="summary-item"><strong>Preferred roles:</strong> ${safe(savedProfile.desired_roles)}</div>
+
+        <button type="button" id="editProfileButton">Edit Profile</button>
+      `;
+
+      document.getElementById("editProfileButton").onclick = () => {
+        isEditing = true;
+        summary.classList.add("hidden");
+        form.classList.remove("hidden");
+        loadIntoForm(savedProfile);
+        saveButton.textContent = "Update Profile";
+        showMessage("Edit your profile and save changes.");
+      };
+    }
+
+    async function loadProfile() {
+      try {
+        const response = await fetch(API_URL);
+        const profile = await response.json();
+
+        if (profile && profile.id) {
+          savedProfile = profile;
+          displaySummary();
+        } else {
+          form.classList.remove("hidden");
+          summary.classList.add("hidden");
+        }
+      } catch (error) {
+        showMessage("Could not connect to backend.", true);
+      }
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const data = getFormData();
+
+      if (savedProfile && normalize(data) === normalize(savedProfile)) {
+        showMessage("Profile already saved. No changes detected.");
+        return;
+      }
+
+      saveButton.disabled = true;
+      saveButton.textContent = "Saving...";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.detail || "Could not save profile.");
+        }
+
+        savedProfile = result.profile || data;
+        isEditing = false;
+
+        showMessage("Profile saved successfully!");
+        displaySummary();
+
+      } catch (error) {
+        showMessage(error.message || "Failed to save profile.", true);
+      } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = "Save Career Profile";
+      }
+    });
+
+    updateExperienceVisibility();
+    loadProfile();
+  </script>
+</body>
+</html>

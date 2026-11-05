@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "ApplyTrack",
+  "version": "1.0.1",
+  "description": "Your personal AI job application copilot.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["http://localhost:5173/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ApplyTrack"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
